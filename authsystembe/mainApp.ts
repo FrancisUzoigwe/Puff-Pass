@@ -2,6 +2,7 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { STATUS, errorFile } from "./error/errorFile";
 import { errorHandler } from "./error/errorHandler";
+import auth from "./router/authRouter"
 
 export const mainApp = (app: Application) => {
   app.use(express.json());
@@ -36,4 +37,5 @@ export const mainApp = (app: Application) => {
     }
   })
   app.use(errorHandler);
+  app.use("/api/v2/auth", auth)
 };
