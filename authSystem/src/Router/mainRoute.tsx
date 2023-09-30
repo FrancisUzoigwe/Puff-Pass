@@ -5,6 +5,7 @@ import SigninScreen from "../Pages/Auth/SigninScreen"
 import SignupScreen from "../Pages/Auth/SignupScreen"
 import Layout from "../components/common/Layout"
 import HomeScreen from "../Pages/Home/HomeScreen"
+import ForgotScreen from "../Pages/Auth/ForgotScreen"
 
 export const mainRoute = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ export const mainRoute = createBrowserRouter([
     {
         path: "/signup",
         element: <SignupScreen/>
+    },
+    {
+        path: "/forget",
+        element: <ForgotScreen/>
     },
     {
         path: "/home",

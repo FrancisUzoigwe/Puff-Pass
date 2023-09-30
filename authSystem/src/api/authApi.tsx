@@ -11,3 +11,13 @@ export const registerApi = async (data: any) => {
     console.log(error.message);
   }
 };
+
+export const signinApi = async (data: any) => {
+  try {
+    return await axios.post( `${url}/signin`, data).then((res: any) => {
+      return res.data
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { registerApi } from "../../api/authApi";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const SignupScreen = () => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -32,7 +33,22 @@ const SignupScreen = () => {
     const { email, password, name } = data;
     registerApi({ email, name, password }).then((res: any) => {
       console.log(res);
-      navigate("/signin");
+      if (data) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Welcome ${name.toUpperCase()} on the platform 🚀`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/signin");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
     });
     reset();
   });
@@ -121,7 +137,7 @@ const SignupScreen = () => {
           </div>
         </div>
         <button
-          className={`mt-[6px] px-7 py-2 rounded-md ${
+          className={`mt-2 px-7 py-2 rounded-md ${
             checked ? "bg-blue-400" : "bg-gray-300"
           } text-white font-semibold duration-500 cursor-pointer`}
           type="submit"
@@ -129,7 +145,7 @@ const SignupScreen = () => {
         >
           Signup
         </button>
-        <div className="text-[13px] font-semibold mt-2">
+        <div className="text-[13px] font-semibold mt-2 ">
           Already Have an Account?{" "}
           <Link to="/signin">
             <span className="underline text-red-400 ml-2">Signin</span>
