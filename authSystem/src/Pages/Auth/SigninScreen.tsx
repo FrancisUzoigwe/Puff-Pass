@@ -6,11 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { signinApi } from "../../api/authApi";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {user} from "../../Global/globalState"
 import Swal from "sweetalert2";
 
 const SigninScreen = () => {
   const [checked, setChecked] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const Schema = yup.object({
@@ -29,8 +31,8 @@ const SigninScreen = () => {
   const onSubmit = handleSubmit(async (data) => {
     const { email, password } = data;
     signinApi({ email, password }).then((res: any) => {
-      if (data) {
-        // console.log("Reading res: ",res);
+      if (res) {
+        dispatch(user(res));
         Swal.fire({
           position: "top-right",
           icon: "success",
